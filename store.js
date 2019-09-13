@@ -64,15 +64,16 @@ var cartItemContainer = document.getElementsByClassName('store-items')[0]
 // var cartItems = document.getElementsByClassName('store-items')[0]
 var cartItemNames = cartItemContainer.getElementsByClassName('item-name')
  for (var i=0; i < cartItemNames.length; i++){
-     if (cartItemNames[i].innerText == title){
-         alert ("This item is already added to the cart ")
-         return
+     if (cartItemNames[i].innerText == title)
+     {
+        //  alert ("This item is already added to the cart ")
+         return;
      }
  }
 var cartRowContents = `
 <div class="row">
 <div class="item-image" >
-<img src="img/ffffff.png">
+<img src="img/cart.png">
                   </div>
                   <div class="item-name" style="width: 40%; font-size: 20px; padding-top: 15px;">
                   ${title}

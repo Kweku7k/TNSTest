@@ -86,14 +86,14 @@ section .section-title {
 .start{
     font-size: 30px;
     font-weight: bold;
-    margin-top: 15%;
+    /* margin-top: 5%; */
 
 }
 .start-button{
     background: #ffec13;
-    width: 52%;
+    width: 60%;
     height: 30%;
-    border-radius: 20px;
+    border-radius: 30px;
     
 }
 .image-1 img{
