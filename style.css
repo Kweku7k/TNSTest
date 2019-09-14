@@ -129,6 +129,12 @@ section .section-title {
 
 }
 
+.solid{
+    border-style: dotted;
+    padding: 3%;
+    margin: 4%;
+}
+
 .start-button {
     background-color: #ffec13;
     border: none;
@@ -166,4 +172,14 @@ section .section-title {
 
     .whitespace{
         height: 100px;
+    }
+
+    .stats{
+        width: 100%;
+        height: 7%;
+        position: fixed;
+        bottom: 0;
+        background: #ffec13;
+        padding: 3%;
+        
     }
