@@ -9,7 +9,7 @@
 
 <script>
 
-var addUp = ["Test"];
+var addUp = ["Test", "Yes", "No"];
 var cuteObject = {
     Key1 : "Value1",
     Key2 : "Value2",
@@ -29,12 +29,15 @@ var cuteObject3 = {
 
 var addToArray = function(objectName){
     for (i=0; i<addUp.length; i++){
-        if (objectName === addUp[i]){
-            return false;
+        if (objectName !== addUp[i]){
+            addUp.push(objectName)
+            break;
         }
         else {
-            console.log("Is this thing even working?")
+            // console.log("Is this thing even working?")
+            continue;
         };
+        // break;
 
     };
 
