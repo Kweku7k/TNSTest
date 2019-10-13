@@ -1,5 +1,8 @@
 var tItems = [];
 
+var quantities = document.getElementsByClassName('cart-quantity-input')[0]
+
+
 if(document.readyState=='loading'){
     document.addEventListener('DOMContentLoaded', ready)
 }
@@ -14,6 +17,7 @@ function ready() {
     for (var i = 0; i < removeCartItemButtons.length; i++){ 
         var button = removeCartItemButtons[i]
         button.addEventListener('click',removeCartItem)
+        removeFromCartClicked()
     } 
         
     var quantityInputs = document.getElementsByClassName('cart-quantity-input')
@@ -26,13 +30,33 @@ function ready() {
         var button = addToCartButtons[i]
         button.addEventListener('click', addToCartClicked)
     }
+    // var removeItemFromCart = document.getElementsByClassName()
+    // pickFromCart()
 }
 
 
 function removeCartItem(event){
     var buttonClicked = event.target
             buttonClicked.parentElement.parentElement.parentElement.remove()
+            // removeFromCartClicked()
+            var buttonClicked = event.target
+            var shopItem = buttonClicked.parentElement.parentElement.parentElement
+            // console.log(shopItem)
+            // var itemContent = shopItem.getElementsByClassName('content')[0]
+            var title = shopItem.getElementsByClassName('item-name')[0].innerText;
+            var price = shopItem.getElementsByClassName('item-price')[0].innerText
+            // var imgsrc = shopItem.getElementsByClassName('image-1')[0].src
+            // var one = "Grilled Rice";
+            // console.log(title)
+            hope = title.split("i")
+            console.log(title, price)   
+            var indexx = tItems.indexOf(title)
+            console.log(indexx)
+            tItems.splice(indexx,2)
+            console.log()
             updateCartTotal()
+            
+
 }
 
 function quantityChanged(event){
@@ -57,10 +81,20 @@ function addToCartClicked(event){
     console.log(tItems)
     addItemToCart(title, price)
     updateCartTotal()
-    
+    countQuantity()
+    // pickFromCart()
+
 }
 
-
+// function removeFromCartClicked(event){
+//     var button = event.target
+//     var shopItem = button.parentElement.parentElement.parentElement
+//     var itemContent = shopItem.getElementsByClassName('content')[0]
+//     var title = itemContent.getElementsByClassName('title')[0].innerText
+//     var price = shopItem.getElementsByClassName('price')[0].innerText
+//     var imgsrc = shopItem.getElementsByClassName('image-1')[0].src
+//     console.log(title, price, imgsrc)
+// }
 
 
 function addItemToCart(title, price){
@@ -80,16 +114,14 @@ var cartRowContents = `
 <div class="item-image" >
 <img src="img/cart.png">
                   </div>
-                  <div class="item-name" style="width: 40%; font-size: 20px; padding-top: 15px;">
-                  ${title}
-                  </div>
+                  <div class="item-name" style="width: 40%; font-size: 20px; padding-top: 15px;">${title}</div>
                   <input class="cart-quantity-input" type="number" value="1" style="height:9%; width: 7%; vertical-align: middle;">
                   <div class="right-control" style="width: 20%; text-align: right;">
                   <div class="remove-item">
                     <i class="fa fa-minus-circle fa-2x"></i>
                   </div>
                   <div class="item-price">
-                    <small class="text-muted price">${price}</small> 
+<small class="text-muted price">${price}</small> 
                     </div>
                     
                   </div>`
@@ -99,14 +131,33 @@ cartItemContainer.append(cartRow)
 cartRow.getElementsByClassName('remove-item')[0].addEventListener('click',removeCartItem)
 cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
 
-// function addItemToCart(title){
+// function addItemToCart(title){           
 // var cartRow = document.createElement('div')
 // cartRow.innerText = title
 // var cartItems = document.getElementsByClassName('store-items')[0]
-// // cartItems.append(cartRow)
+// cartItems.append(cartRow)
 // console.log(cartItems)                  
 }
 
+
+// I built this function to get the quantity element.
+function countQuantity(){
+    var cartItemContainer = document.getElementsByClassName('store-items')[0]
+    var cartRows = cartItemContainer.getElementsByClassName('row')
+    for (var i = 0; i < cartRows.length; i++){
+        var cartRow = cartRows[i]
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+        var quantity = quantityElement.value
+        console.log(quantity)
+
+    }
+    // var quantityElement = cartRows.getElementsByClassName('cart-quantity-input')[0]
+    // var quantity = quantityElement.value
+    // console.log(quantity)
+
+
+
+}
 
 function updateCartTotal() {
     var cartItemContainer = document.getElementsByClassName('store-items')[0]
@@ -119,6 +170,7 @@ function updateCartTotal() {
         var price =parseFloat( priceElement.innerText.replace('Ghc',''))
         var quantity = quantityElement.value
         total = total + (price*quantity)
+
     }
     total = Math.round(total * 100)/100
     document.getElementsByClassName('total-price')[0].innerText = 'Ghc'+total
