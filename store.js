@@ -55,8 +55,6 @@ function removeCartItem(event){
             tItems.splice(indexx,2)
             console.log()
             updateCartTotal()
-            
-
 }
 
 function quantityChanged(event){
@@ -77,14 +75,19 @@ function addToCartClicked(event){
     var price = shopItem.getElementsByClassName('price')[0].innerText
     var imgsrc = shopItem.getElementsByClassName('image-1')[0].src
     console.log(title, price, imgsrc)
-    tItems.push(title, price)
     console.log(tItems)
-    addItemToCart(title, price)
-    updateCartTotal()
-    countQuantity()
+    var check = tItems.indexOf(title)
+    console.log(check)
+    if (check === -1){
+        tItems.push(title, price)
+        console.log(tItems)
+        addItemToCart(title, price)
+        updateCartTotal()
+        countQuantity()
+    }
     // pickFromCart()
 
-}
+}   
 
 // function removeFromCartClicked(event){
 //     var button = event.target
@@ -137,6 +140,25 @@ cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('chang
 // var cartItems = document.getElementsByClassName('store-items')[0]
 // cartItems.append(cartRow)
 // console.log(cartItems)                  
+}
+
+function sendArray(){
+    var formHolder = document.getElementsByClassName('trick-form')[0]
+    var theForm = document.createElement('div')
+    // var formArray = array.innerHTML
+    var formContent= `
+    <form action="/" method="POST">
+    <div class="form-group">
+    <label for = "food">Food</label>
+    <input type="hidden" class="form-control" id="food" name="food" value="${tItems}">
+    </div>
+    </form>
+    </div>
+    `
+    theForm.innerHTML = formContent
+    formHolder.append(theForm)
+
+
 }
 
 
